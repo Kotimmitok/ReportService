@@ -86,7 +86,7 @@ Possible extensions:
 
 ## Running the Project
 
-Clone the repository and run:
+Clone the repository and run inside the SalesReportGenerator:
 
 ```bash
 dotnet run
