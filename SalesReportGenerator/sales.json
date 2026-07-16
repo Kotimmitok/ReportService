@@ -1,0 +1,32 @@
+[
+  {
+    "Date": "2026-07-01T10:30:00",
+    "Amount": 120.50,
+    "Currency": "USD"
+  },
+  {
+    "Date": "2026-07-03T15:45:00",
+    "Amount": 89.99,
+    "Currency": "EUR"
+  },
+  {
+    "Date": "2026-07-10T09:15:00",
+    "Amount": 200.00,
+    "Currency": "GBP"
+  },
+  {
+    "Date": "2026-07-15T14:20:00",
+    "Amount": 75.25,
+    "Currency": "USD"
+  },
+  {
+    "Date": "2026-06-28T18:10:00",
+    "Amount": 50.00,
+    "Currency": "EUR"
+  },
+  {
+    "Date": "2026-08-02T11:00:00",
+    "Amount": 310.75,
+    "Currency": "USD"
+  }
+]
