@@ -1,35 +1,36 @@
-﻿using System.Text.Json;
-
-public class ReportService : IReportService
+﻿public class ReportService : IReportService
 {
+    private readonly ISalesRepository _repository;
     private readonly ICurrencyConverter _converter;
+    private readonly IReportWriter _writer;
 
-    public ReportService(ICurrencyConverter converter)
+    public ReportService(
+        ISalesRepository repository,
+        ICurrencyConverter converter,
+        IReportWriter writer)
     {
+        _repository = repository;
         _converter = converter;
+        _writer = writer;
     }
 
     public void CreateReportForYearAndMonth(int year, int month)
     {
-        var sales = JsonSerializer.Deserialize<List<Sale>>(
-            File.ReadAllText("sales.json")) ?? new List<Sale>();
+        var sales = _repository.GetAll();
 
-        var filteredSales = sales
+        var filtered = sales
             .Where(s => s.Date.Year == year &&
                         s.Date.Month == month);
 
-        decimal total = filteredSales.Sum(s =>
+        var total = filtered.Sum(s =>
             _converter.ConvertToUsd(s.Amount, s.Currency));
 
         var report = new List<string>
         {
-            $"Monatlicher Verkaufsbericht ({month}/{year})",
-            $"Gesamt Umsatz in USD: {total:F2}"
+            $"Report {month}/{year}",
+            $"Total: {total:F2} USD"
         };
 
-        File.WriteAllLines($"report_{year}_{month}.txt", report);
-
-        Console.WriteLine("Report generated.");
+        _writer.Write($"report_{year}_{month}.txt", report);
     }
 }
-
